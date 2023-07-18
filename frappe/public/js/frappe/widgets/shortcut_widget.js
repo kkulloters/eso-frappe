@@ -21,6 +21,7 @@ export default class ShortcutWidget extends Widget {
 			stats_filter: this.stats_filter,
 			type: this.type,
 			url: this.url,
+			kanban: this.kanban
 		};
 	}
 
@@ -35,6 +36,7 @@ export default class ShortcutWidget extends Widget {
 				is_query_report: this.is_query_report,
 				doctype: this.ref_doctype,
 				doc_view: this.doc_view,
+				kanban: this.kanban
 			});
 
 			let filters = frappe.utils.get_filter_from_json(this.stats_filter);

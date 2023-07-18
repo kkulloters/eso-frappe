@@ -1294,7 +1294,7 @@ Object.assign(frappe.utils, {
 							route = `${doctype_slug}/view/calendar/default`;
 							break;
 						case "Kanban":
-							route = `${doctype_slug}/view/kanban`;
+							route = `${doctype_slug}/view/kanban/${item.kanban}`;
 							break;
 						default:
 							route = doctype_slug;

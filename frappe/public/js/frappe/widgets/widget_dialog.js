@@ -394,7 +394,7 @@ class ShortcutDialog extends WidgetDialog {
 								this.show_filters();
 							}
 
-							const views = ["List", "Report Builder", "Dashboard", "New"];
+							const views = ["List", "Report Builder", "Dashboard", "New", "Kanban"];
 							if (meta.is_tree === "Tree") views.push("Tree");
 							if (frappe.boot.calendars.includes(doctype)) views.push("Calendar");
 
@@ -432,6 +432,32 @@ class ShortcutDialog extends WidgetDialog {
 						return state.type == "DocType" && !is_single;
 					}
 
+					return false;
+				},
+				onchange: () => {
+					if (this.dialog.get_value("doc_view") == "Kanban") {
+						this.dialog.fields_dict.kanban.get_query = () => {
+							return {
+								filters: {
+									reference_doctype: this.dialog.get_value("link_to"),
+								},
+							};
+						};
+					} else {
+						this.dialog.fields_dict.link_to.get_query = null;
+					}
+				}
+			},
+			{
+				fieldtype: "Link",
+				fieldname: "kanban",
+				label: "Kanban Board",
+				options: "Kanban Board",
+				depends_on: () => {
+					if (this.dialog) {
+						let doc_view = this.dialog.get_value("doc_view");
+						return doc_view == "Kanban";
+					}
 					return false;
 				},
 			},
